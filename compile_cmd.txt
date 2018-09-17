@@ -1,0 +1,7 @@
+swig -python -c++ -o Demosaic_wrap.cpp Demosaic.i
+
+gcc -I /home/datacart-workstation/workspace/datacart_env/include/python3.7m -I /home/datacart-workstation/workspace/datacart_env/lib/python3.6/site-packages/numpy/core/include/numpy -c Demosaic_wrap.cpp -o Demosaic_wrap.o -fpic -std=c++0x
+
+gcc -I /home/datacart-workstation/workspace/datacart_env/include/python3.7m -I /home/datacart-workstation/workspace/datacart_env/lib/python3.6/site-packages/numpy/core/include/numpy -c Demosaic.cpp -o Demosaic.o -fpic -std=c++0x
+
+g++ Demosaic_wrap.o Demosaic.o -o _Demosaic.so `pkg-config --cflags --libs opencv` -shared -Wl,-soname,_Demosaic.so
